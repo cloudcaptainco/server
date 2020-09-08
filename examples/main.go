@@ -23,8 +23,11 @@ func main() {
 
 	testController := testController{}
 
+	// Ensure to create the server.HTTPController map, and pass a
+	// struct pointer when implementing an external package. Value
+	// types are not accepted external to the server package.
 	routes := &map[string]server.HTTPController{
-		"/test": testController,
+		"/test": &testController,
 	}
 	config := server.Config{"172.0.0.1", "8081"}
 
